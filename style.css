@@ -1,16 +1,4 @@
 
-/*form{
-    
-    background-color:#000080 ;
-    width: 50%;
-    display: block;
-    margin-left: 25%;
-    margin-right: auto;
-    border: 2px solid #B8860D;
-    border-radius: 10px;
-    padding: 20px;
-    justify-content: center;
-} */
 
 body{
    display: flex;
@@ -80,8 +68,8 @@ form {
  select{
    font: 1em courier;
    font-size: 17px;
-   font-weight: bolder;
-   color: #C0C0C0;
+   font-weight: 400px;
+   color: black;
  }
  input[type="radio"] {
     margin: 10px;
@@ -166,37 +154,8 @@ form {
    outline: 0;
 }
 
-/* .properties small{
-   position: relative;
-   bottom: o;
-   left: 0;
-}*/
-/* .form-style.success input {
-  border-color: green;
-}
 
-.form-style.error input {
-   border-color:#ff3860 ;
-   
-} */
-
-/* .form-style .error input {
-   border-color:#ff3860 ;
-   font-size: 9px;
-   height:0px ;
-   
-} */
-
-/* .form-style .error {
-   font-size: 12px;
-   height:auto ;
-   position: absolute;
-   left:200px ;
-   color: #ff3860;
-   top: auto;
-} */
-
-input{
+.input-wrapper{
    width: 100%;
 }
 
@@ -208,8 +167,8 @@ input{
 
 .error input,
 .error textarea,
-.success select {
-  border: 2px solid #ff5050;
+.error select {
+  border: 2px solid #a4133c;
 }
 
 small {
@@ -219,18 +178,6 @@ small {
   padding-top: 4px;
 }
 
-.error small {
-  visibility: visible;
-  color: #ff5050;
-}
- 
- /* .form-style small {
-   position: absolute;
-   bottom: -1.2rem;
-   left: 0;
-   visibility: hidden;
- }
-  */
  .error small {
  
    visibility: visible;

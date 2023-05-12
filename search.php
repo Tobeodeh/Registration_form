@@ -9,73 +9,54 @@
 <body>
   <h1>Success</h1>       
   <p>You have successfully registered</p>
+  <p>You can search through the table of records using the search input</p>
       
-  <form method="get">
-    <label for="search">Search:</label>
-    <input type="text" name="search" id="search" placeholder="search" value="<?php 
-  
- if (isset($_GET['search'])) {
-    $data = trim($_GET['search']);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data = str_replace("+", "", $data);
-
-    echo $data;
-    } ?>
-    ">
+  <form method="post">
+    <div>
+      <input type="text" name="search_term" id="search_term" placeholder="search" value="<?php echo isset($_POST['search_term']) ? $_POST['search_term'] :'';?>">
+      <input type = "submit" value="Search" class="search">
+    </div>
+    
 </form>
 <br>
 <?php require "./sql_conn.php";
   
 
   $conn = OpenCon();
-    // Check if the search form was submitted
-    if (isset($_GET['search'])) {
-    
-        // Get the search term from the form input
-        $search_term = $_GET['search'];
+  $exclude_columns = array("Password", "Phone","ZipCode");
 
-        // Build the SQL query
-        $query = "SELECT * FROM data_table WHERE First_Name LIKE '%{$search_term}%' OR Last_Name LIKE '%{$search_term}%' ";
+// Define the search term
+  $search_term = isset($_POST["search_term"]) ? $_POST["search_term"] : "";
 
-        // Execute the query
-        $result = mysqli_query($conn, $query);
+  // Build the SQL query
+  $sql = "SELECT * FROM data_table";
+  if($search_term){
+    $sql = "SELECT * FROM data_table WHERE CONCAT_WS('', First_Name, Last_Name, Language, Gender, ZipCode) LIKE '%$search_term%' ";
+  }
+ 
+  $result = $conn->query($sql);
 
-        // Check if any results were found
-        if (mysqli_num_rows($result) > 0) {
-        // Display the results in an HTML table
-        echo "<table>";
-        echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Gender</th><th>About</th></tr>";
-        while ($row = mysqli_fetch_assoc($result)) {
-          echo "<tr><td>".$row["First_Name"]."</td><td>".$row["Last_Name"]."</td><td>".$row["Email"]."</td><td>". $row["Gender"]."</td><td>". $row["About"]."</td></tr>" ;
-        echo "<table>";
-        
-        // <table>
-        // <tr>
-        //   <th>First Name</th>
-        //   <th> Last Name</th>
-        //   <th>Email</th>
-        //   <th>Gender</th>
-        //   <th>About</th>
-        // </tr>
-        // <?php
-        
-        
-            // echo "First Name: " "<br>";
-            // echo "Last Name: " "<br>";
-            // echo "Email: " "<br>";
-            // echo "Gender: " "<br>";
-            // echo "About: " "<br>";
-            // echo "<hr>";
-        }
-        } else {
-        // Display a message if no results were found
-        echo '<p>No results found.</p>';
-        }
+  // Build the table
+  if ($result->num_rows > 0) {
+      echo "<table>";
+      echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Gender</th><th>Language</th><th>About</th></tr>";
+      while ($row = $result->fetch_assoc()) {
+          echo "<tr>";
+          foreach ($row as $key => $value) {
+              if (!in_array($key, $exclude_columns)) {
+                  echo "<td>" . $value . "</td>";
+              }
+          }
+          echo "</tr>";
+      }
+      echo "</table>";
+  } else {
+      echo "No results found.";
+  }
 
-        // Close the database connection
-        CloseCon($conn);
-    }
+// Close the connection
+$conn->close();
+   
 ?>
 </body>
 </html>
