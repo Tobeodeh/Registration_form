@@ -1,0 +1,6 @@
+# PHP FRAMEWORKS
+## Laravel:
+Laravel is a popular open-source PHP web application framework used for web development. It follows the Model-View-Controller (MVC) architectural pattern. Laravel has a wide range of features, including a modular packaging system, a robust set of tools and libraries, and built-in authentication and authorization systems. It also has an expressive syntax, which makes it easy to write and maintain code. Laravel is known for its elegant syntax, and it is highly extensible and customizable.
+
+## Symfony: 
+Symfony is another popular PHP web application framework that follows the Model-View-Controller (MVC) architectural pattern. It is a full-stack framework that provides a wide range of features, including a powerful routing system, object-relational mapping (ORM), and a templating engine. Symfony is known for its flexibility, and it is highly customizable. It has a large and active community of developers, which makes it easy to find solutions to common problems. Symfony is also highly modular, which makes it easy to use only the components you need.
